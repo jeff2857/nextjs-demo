@@ -29,6 +29,7 @@ export default function SDKContainer() {
 	const [serviceStatus, setServiceStatus] = useState<ServiceStatus>();
 	const [activeProvider, setActiveProvider] = useState<SDKProvider>();
 	const [currentLanguage, setCurrentLanguage] = useState('en');
+	const [log, setLog] = useState('');
 
 	const languages = sdk?.availableLanguages ?? ['en'];
 
@@ -165,6 +166,7 @@ export default function SDKContainer() {
 				setAccount('');
 			}
 			setActiveProvider(sdk.getProvider());
+			setLog('provider' + sdk.getProvider());
 		};
 		// listen for provider change events
 		sdk.on(EventType.PROVIDER_UPDATE, onProviderEvent);
@@ -339,6 +341,9 @@ export default function SDKContainer() {
 						))}
 					</select>
 				</div>
+
+				<div>log: {log}</div>
+
 				<div className={'info-section'}>
 					<>
 						{`Connected chain: ${chain}`}
